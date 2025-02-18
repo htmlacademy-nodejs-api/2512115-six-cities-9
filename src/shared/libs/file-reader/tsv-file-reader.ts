@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs';
 
 import { FileReader } from './file-reader.interface.js';
-import { Offer, User } from '../../types/index.js';
+import { OfferType, UserType } from '../../types/index.js';
+import { SEMICOLON } from '../../const/const.js';
+import { CityEnum } from '../../enums/city.enum.js';
 
 export class TSVFileReader implements FileReader {
   private rawData = '';
@@ -16,14 +18,14 @@ export class TSVFileReader implements FileReader {
     }
   }
 
-  private parseRawDataToOffers(): Offer[] {
+  private parseRawDataToOffers(): OfferType[] {
     return this.rawData
       .split('\n')
       .filter((row) => row.trim().length > 0)
       .map((line) => this.parseLineToOffer(line));
   }
 
-  private parseLineToOffer(line: string): Offer {
+  private parseLineToOffer(line: string): OfferType {
     const [
       title,
       description,
@@ -32,58 +34,58 @@ export class TSVFileReader implements FileReader {
       previewImage,
       images,
       isPremium,
-      isFavorite,
       rating,
       type,
       bedrooms,
       maxAdults,
       price,
       goods,
-      host,
+      user,
       location
     ] = line.split('\t');
+
+    const [lat, lon] = location.split(SEMICOLON);
 
     return {
       title,
       description,
       postDate: new Date(postDate),
-      city,
+      city: city as CityEnum,
       previewImage,
       images: this.parseImages(images),
-      isPremium,
-      isFavorite,
-      rating,
+      isPremium: isPremium.toLocaleLowerCase() === 'true',
+      rating: Number(rating),
       type,
-      bedrooms,
-      maxAdults,
-      price: this.parsePrice(price),
+      bedrooms: Number(bedrooms),
+      maxAdults: Number(maxAdults),
+      price: Number(price),
       goods: this.parseGoods(goods),
-      host: this.parseHost(name, email, avatarPath, isPro),
-      location,
+      user: this.parseUser(user),
+      location: {
+        latitude: Number(lat),
+        longitude: Number(lon)
+      },
     };
   }
 
-  private parseGoods(goodsString: string): { name: string }[] {
-    return goodsString.split(';').map((name) => ({ name }));
+  private parseGoods(goodsString: string): string[] {
+    return goodsString.split(SEMICOLON);
   }
 
-  private parseImages(imagesString: string): { name: string }[] {
-    return imagesString.split(';').map((name) => ({ name }));
+  private parseImages(imagesString: string): string[] {
+    return imagesString.split(SEMICOLON);
   }
 
-  private parsePrice(priceString: string): number {
-    return Number.parseInt(priceString, 10);
-  }
-
-  private parseHost(name: string, email: string, avatarPath: string, isPro: boolean): User {
-    return { name, email, avatarPath, isPro };
+  private parseUser(user: string): UserType {
+    const [name, email, avatarPath, isPro] = user.split(SEMICOLON)
+    return { name, email, avatarPath, isPro: isPro === 'true' };
   }
 
   public read(): void {
     this.rawData = readFileSync(this.filename, { encoding: 'utf-8' });
   }
 
-  public toArray(): Offer[] {
+  public toArray(): OfferType[] {
     this.validateRawData();
     return this.parseRawDataToOffers();
   }
