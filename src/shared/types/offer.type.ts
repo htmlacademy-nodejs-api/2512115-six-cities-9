@@ -1,5 +1,5 @@
-import { CityEnum } from "../enums/city.enum.js";
-import { UserType } from "./user.type.js";
+import { CityEnum } from '../enums/city.enum.js';
+import { UserType } from './user.type.js';
 
 export type OfferType = {
     title: string;
