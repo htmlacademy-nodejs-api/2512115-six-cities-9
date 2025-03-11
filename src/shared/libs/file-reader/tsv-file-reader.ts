@@ -77,7 +77,7 @@ export class TSVFileReader implements FileReader {
   }
 
   private parseUser(user: string): UserType {
-    const [name, email, avatarPath, isPro] = user.split(SEMICOLON)
+    const [name, email, avatarPath, isPro] = user.split(SEMICOLON);
     return { name, email, avatarPath, isPro: isPro === 'true' };
   }
 
