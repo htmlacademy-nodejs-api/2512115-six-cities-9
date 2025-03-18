@@ -4,7 +4,7 @@ import { UserType } from './user.type.js';
 export type OfferType = {
     title: string;
     description: string;
-    postDate: Date;
+    postDate?: Date;
     city: CityEnum;
     previewImage: string;
     images: string[];

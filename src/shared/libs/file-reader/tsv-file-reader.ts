@@ -1,35 +1,25 @@
-import { readFileSync } from 'node:fs';
-
 import { FileReader } from './file-reader.interface.js';
 import { OfferType, UserType } from '../../types/index.js';
 import { SEMICOLON } from '../../const/const.js';
 import { CityEnum } from '../../enums/city.enum.js';
+import { EventEmitter } from 'node:events';
+import { createReadStream } from 'node:fs';
 
-export class TSVFileReader implements FileReader {
-  private rawData = '';
+export class TSVFileReader extends EventEmitter implements FileReader {
+  private CHUNK_SIZE = 16384;
 
   constructor(
     private readonly filename: string
-  ) {}
-
-  private validateRawData(): void {
-    if (! this.rawData) {
-      throw new Error('File was not read');
-    }
+  ) {
+    super();
   }
 
-  private parseRawDataToOffers(): OfferType[] {
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((line) => this.parseLineToOffer(line));
-  }
 
   private parseLineToOffer(line: string): OfferType {
     const [
       title,
       description,
-      postDate,
+      // postDate,
       city,
       previewImage,
       images,
@@ -49,7 +39,7 @@ export class TSVFileReader implements FileReader {
     return {
       title,
       description,
-      postDate: new Date(postDate),
+      // postDate: new Date(postDate),
       city: city as CityEnum,
       previewImage,
       images: this.parseImages(images),
@@ -81,12 +71,29 @@ export class TSVFileReader implements FileReader {
     return { name, email, avatarPath, isPro: isPro === 'true' };
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.filename, { encoding: 'utf-8' });
-  }
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filename, {
+      highWaterMark: this.CHUNK_SIZE,
+      encoding: 'utf-8'
+    });
 
-  public toArray(): OfferType[] {
-    this.validateRawData();
-    return this.parseRawDataToOffers();
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        const parsedOffer = this.parseLineToOffer(completeRow);
+        this.emit('line', parsedOffer);
+      }
+    }
+    this.emit('end', importedRowCount);
   }
 }
+
