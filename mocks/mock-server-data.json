@@ -1,0 +1,120 @@
+{
+  "api": {
+    "titles": [
+      "Ваш идеальный уголок: аренда мечты начинается здесь!",
+      "Комфорт в каждом метре: арендуйте с удовольствием!",
+      "Пространство для жизни: аренда без забот!",
+      "Дом там, где ты: найди своё место с нами!",
+      "Аренда с характером: стиль и удобство в одном месте!",
+      "Новый адрес вашего счастья: арендуйте с уверенностью!",
+      "Простор для вдохновения: аренда для ваших идей!",
+      "Уютный старт: аренда, которая вдохновляет!",
+      "Ваш дом, ваш стиль: арендуйте с комфортом!",
+      "Место, где хочется остаться: аренда с душой!"
+    ],
+    "descriptions": [
+      "Современные апартаменты в центре города. Всё для комфортной жизни: мебель, техника и стильный интерьер.",
+      "Уютная студия с панорамными окнами. Идеально для тех, кто ценит свет, простор и удобство.",
+      "Просторная квартира для семьи. Детская площадка во дворе, парк рядом и вся инфраструктура под рукой.",
+      "Стильный лофт в творческом квартале. Подходит для жизни и работы — вдохновение гарантировано!",
+      "Комфортабельная однушка рядом с метро. Всё, что нужно для жизни, в шаговой доступности.",
+      "Дом с террасой и видом на парк. Уединение и природа в черте города.",
+      "Квартира с ремонтом премиум-класса. Дизайн, который вдохновляет, и комфорт, который радует.",
+      "Студия для молодых профессионалов. Современный дизайн, быстрый интернет и удобная локация.",
+      "Апартаменты с видом на город. Наслаждайтесь панорамой и комфортом каждый день.",
+      "Уютное гнёздышко для пары. Романтика, комфорт и всё необходимое для счастья."
+    ],
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "previews": [
+      "cozy-living-room.jpg",
+      "modern-kitchen-view.jpg",
+      "city-balcony.jpg",
+      "bright-studio-apartment.jpg",
+      "luxury-bedroom.jpg",
+      "spacious-dining-area.jpg",
+      "home-office-space.jpg",
+      "apartment-with-view.jpg",
+      "minimalist-interior.jpg",
+      "family-friendly-living.jpg"
+    ],
+    "images": [
+      "elegant-fireplace.jpg",
+      "stylish-kitchen-counter.jpg",
+      "sunlit-bathroom.jpg",
+      "walk-in-closet.jpg",
+      "hardwood-flooring.jpg",
+      "panoramic-window-view.jpg",
+      "modern-light-fixtures.jpg",
+      "cozy-reading-nook.jpg",
+      "spacious-walk-in-shower.jpg",
+      "built-in-wardrobe.jpg",
+      "balcony-with-greenery.jpg",
+      "open-plan-living-area.jpg",
+      "marble-kitchen-island.jpg",
+      "high-ceiling-details.jpg",
+      "laundry-room-setup.jpg"
+    ],
+    "boolean": [
+      "true",
+      "false"
+    ],
+    "housingTypes": [
+      "Apartment",
+      "House",
+      "Room",
+      "Hotel"
+    ],
+    "comforts": [
+      "Breakfast",
+      "Air Conditioning",
+      "Laptop Friendly Workspace",
+      "Baby Seat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "authorNames": [
+      "Алексей Волков",
+      "Екатерина Соколова",
+      "Дмитрий Морозов",
+      "Анна Белова",
+      "Иван Кузнецов",
+      "Ольга Орлова",
+      "Сергей Громов",
+      "Сергей Громов",
+      "Павел Новиков",
+      "Виктория Зимина"
+    ],
+    "authorEmails": [
+      "mail1@example.com",
+      "mail2@example.com",
+      "mail3@example.com",
+      "mail4@example.com",
+      "mail5@example.com",
+      "mail6@example.com",
+      "mail7@example.com",
+      "mail8@example.com",
+      "mail9@example.com",
+      "mail10@example.com"
+    ],
+    "authorAvatars": [
+      "image1.png",
+      "image2.png",
+      "image3.png",
+      "image4.png",
+      "image5.png",
+      "image6.png",
+      "image7.png",
+      "image8.png",
+      "image9.png",
+      "image10.png"
+    ]
+  }
+}
